@@ -51,7 +51,7 @@ while IFS= read -r file; do
 done < <(find Sonic SonicTests -name '*.swift' -type f | sort)
 
 printf '\n[validate] Type-checking portable data and service layers\n'
-./scripts/portable-typecheck.sh
+bash ./scripts/portable-typecheck.sh
 
 printf '\n[validate] Type-checking and exercising the platform-neutral lyrics parser\n'
 SMOKE_BINARY="$(mktemp)"
