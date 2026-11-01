@@ -34,7 +34,7 @@ jobs:
           xcodebuild -list -project Sonic.xcodeproj
 
       - name: Static project validation
-        run: ./scripts/ci-validate.sh
+        run: bash ./scripts/ci-validate.sh
 
       - name: Build and run unit tests on an available iPhone simulator
         shell: bash
