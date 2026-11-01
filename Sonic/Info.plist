@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleDisplayName</key><string>Sonic</string>
+    <key>CFBundleIdentifier</key><string>com.sonic.music</string>
+    <key>CFBundleName</key><string>Sonic</string>
+    <key>CFBundlePackageType</key><string>APPL</string>
+    <key>CFBundleShortVersionString</key><string>1.3.0</string>
+    <key>CFBundleVersion</key><string>4</string>
+    <key>LSRequiresIPhoneOS</key><true/>
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLName</key><string>com.sonic.music.spotify</string>
+            <key>CFBundleURLSchemes</key><array><string>sonic</string></array>
+        </dict>
+    </array>
+    <key>UILaunchScreen</key><dict/>
+    <key>UIBackgroundModes</key><array><string>audio</string></array>
+    <key>UISupportedInterfaceOrientations</key><array><string>UIInterfaceOrientationPortrait</string><string>UIInterfaceOrientationLandscapeLeft</string><string>UIInterfaceOrientationLandscapeRight</string></array>
+    <key>NSAppleMusicUsageDescription</key><string>Sonic uses Apple Music authorization to search and play catalog music you are entitled to access.</string>
+    <key>ITSAppUsesNonExemptEncryption</key><false/>
+</dict>
+</plist>

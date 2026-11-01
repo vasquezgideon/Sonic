@@ -1,0 +1,105 @@
+name: Sonic iOS CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sonic-ios-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    name: Build and test iOS app
+    runs-on: macos-26
+    timeout-minutes: 40
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v7
+
+      - name: Select Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: "~26.4.0"
+
+      - name: Show toolchain
+        run: |
+          xcodebuild -version
+          swift --version
+          xcodebuild -list -project Sonic.xcodeproj
+
+      - name: Static project validation
+        run: ./scripts/ci-validate.sh
+
+      - name: Build and run unit tests on an available iPhone simulator
+        shell: bash
+        run: |
+          set -euo pipefail
+          DEVICE_ID="$(xcrun simctl list devices available -j | python3 -c 'import json,sys; d=json.load(sys.stdin); devices=[x for group in d["devices"].values() for x in group if x.get("isAvailable") and x.get("name", "").startswith("iPhone")]; print(devices[0]["udid"] if devices else "")')"
+          if [[ -z "$DEVICE_ID" ]]; then
+            echo "No available iPhone simulator was found on this runner." >&2
+            xcrun simctl list devices available
+            exit 1
+          fi
+          echo "Using simulator: $DEVICE_ID"
+          xcodebuild clean test \
+            -project Sonic.xcodeproj \
+            -scheme Sonic \
+            -configuration Debug \
+            -destination "platform=iOS Simulator,id=$DEVICE_ID" \
+            -derivedDataPath "$RUNNER_TEMP/SonicDerivedData" \
+            -resultBundlePath "$RUNNER_TEMP/Sonic.xcresult" \
+            -parallel-testing-enabled NO \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            | tee "$RUNNER_TEMP/Sonic-xcodebuild.log"
+
+      - name: Compile an unsigned iPhone device build
+        shell: bash
+        run: |
+          set -euo pipefail
+          xcodebuild build \
+            -project Sonic.xcodeproj \
+            -scheme Sonic \
+            -configuration Release \
+            -sdk iphoneos \
+            -destination 'generic/platform=iOS' \
+            -derivedDataPath "$RUNNER_TEMP/SonicDeviceDerivedData" \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            | tee "$RUNNER_TEMP/Sonic-device-build.log"
+
+      - name: Upload unsigned iPhone build product
+        if: success()
+        uses: actions/upload-artifact@v7
+        with:
+          name: Sonic-iPhone-Unsigned-${{ github.run_number }}
+          path: ${{ runner.temp }}/SonicDeviceDerivedData/Build/Products/Release-iphoneos/Sonic.app
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Upload simulator app
+        if: success()
+        uses: actions/upload-artifact@v7
+        with:
+          name: Sonic-iOS-Simulator-${{ github.run_number }}
+          path: ${{ runner.temp }}/SonicDerivedData/Build/Products/Debug-iphonesimulator/Sonic.app
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Upload Xcode result bundle and logs
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: Sonic-iOS-CI-Diagnostics-${{ github.run_number }}
+          path: |
+            ${{ runner.temp }}/Sonic.xcresult
+            ${{ runner.temp }}/Sonic-xcodebuild.log
+            ${{ runner.temp }}/Sonic-device-build.log
+          if-no-files-found: warn
+          retention-days: 14

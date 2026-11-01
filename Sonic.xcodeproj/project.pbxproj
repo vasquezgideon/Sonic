@@ -1,0 +1,65 @@
+// !$*UTF8*$!
+{
+ archiveVersion = 1;
+ classes = {};
+ objectVersion = 56;
+ objects = {
+7D2F60FC5B2B4A1BA8A12384 = { isa = PBXProject; attributes = { BuildIndependentTargetsInParallel = 1; LastUpgradeCheck = 1600; }; buildConfigurationList = 0362757C2C134AE991D527B3; compatibilityVersion = "Xcode 14.0"; developmentRegion = en; hasScannedForEncodings = 0; knownRegions = (en, Base); mainGroup = 684AE0D8149A40B7A97CC71C; productRefGroup = 8C6C6970C12242E29F13E13F; projectDirPath = ""; projectRoot = ""; targets = (549DB1EA19BB43CBB0BC8165, A20000000000000000000001,); };
+549DB1EA19BB43CBB0BC8165 = { isa = PBXNativeTarget; buildConfigurationList = EA98141A104C411DA735867A; buildPhases = (6B3D5742AB7546C3B086F89F, E6970D0C09524F6C82B0404D, 1D409B71415346708FFB05F3,); buildRules = (); dependencies = (); name = Sonic; productName = Sonic; productReference = C71D4C3D8D5A41B88B5435DF; productType = "com.apple.product-type.application"; };
+C71D4C3D8D5A41B88B5435DF = { isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sonic.app; sourceTree = BUILT_PRODUCTS_DIR; };
+D006D055880F4EC5BC85C545 = { isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Sonic/Info.plist; sourceTree = SOURCE_ROOT; };
+3371F1606DFB4DFD89C79A73 = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sonic/App/SonicApp.swift"; sourceTree = SOURCE_ROOT; };
+F9FCD550763141A1ADFE4D3F = { isa = PBXBuildFile; fileRef = 3371F1606DFB4DFD89C79A73; };
+34CFFF07184E48B3AAE78622 = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sonic/Models/Track.swift"; sourceTree = SOURCE_ROOT; };
+7C65959FA786410891C3EB48 = { isa = PBXBuildFile; fileRef = 34CFFF07184E48B3AAE78622; };
+C3D5B9E9C44148609ED82935 = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sonic/Services/CatalogService.swift"; sourceTree = SOURCE_ROOT; };
+29340A1B860848D0BCFB9B54 = { isa = PBXBuildFile; fileRef = C3D5B9E9C44148609ED82935; };
+5B44D2C4A58C4042878F030B = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sonic/Services/KeychainStore.swift"; sourceTree = SOURCE_ROOT; };
+28410C8DFC7B43A391AFFE7D = { isa = PBXBuildFile; fileRef = 5B44D2C4A58C4042878F030B; };
+BC48AE18D2DE4187952BA12F = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sonic/Services/LibraryStore.swift"; sourceTree = SOURCE_ROOT; };
+6E51267360FF45E5B7E7E510 = { isa = PBXBuildFile; fileRef = BC48AE18D2DE4187952BA12F; };
+AC4E1935F0B44124A61BB5FC = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sonic/Services/PlaybackManager.swift"; sourceTree = SOURCE_ROOT; };
+3D1FC6D08705460293E13B09 = { isa = PBXBuildFile; fileRef = AC4E1935F0B44124A61BB5FC; };
+634B8B31E5B4449B8E74EA93 = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sonic/Services/ServerService.swift"; sourceTree = SOURCE_ROOT; };
+FF9A707C6D8447D09AB6BB83 = { isa = PBXBuildFile; fileRef = 634B8B31E5B4449B8E74EA93; };
+91C87567AD46434FAC3822F8 = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sonic/Views/RootView.swift"; sourceTree = SOURCE_ROOT; };
+5FD70ECFF05243748E0629D2 = { isa = PBXBuildFile; fileRef = 91C87567AD46434FAC3822F8; };
+
+A10000000000000000000001 = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sonic/Services/MusicAccounts.swift"; sourceTree = SOURCE_ROOT; };
+A10000000000000000000002 = { isa = PBXBuildFile; fileRef = A10000000000000000000001; };
+A10000000000000000000003 = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sonic/Services/MashupEngine.swift"; sourceTree = SOURCE_ROOT; };
+A10000000000000000000004 = { isa = PBXBuildFile; fileRef = A10000000000000000000003; };
+A10000000000000000000005 = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sonic/Views/FeatureViews.swift"; sourceTree = SOURCE_ROOT; };
+A10000000000000000000006 = { isa = PBXBuildFile; fileRef = A10000000000000000000005; };
+A10000000000000000000007 = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sonic/Services/LyricsService.swift"; sourceTree = SOURCE_ROOT; };
+A10000000000000000000008 = { isa = PBXBuildFile; fileRef = A10000000000000000000007; };
+A20000000000000000000002 = { isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SonicTests/LyricsParserTests.swift"; sourceTree = SOURCE_ROOT; };
+A20000000000000000000003 = { isa = PBXBuildFile; fileRef = A20000000000000000000002; };
+A20000000000000000000004 = { isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SonicTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+
+6B3D5742AB7546C3B086F89F = { isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (F9FCD550763141A1ADFE4D3F, 7C65959FA786410891C3EB48, 29340A1B860848D0BCFB9B54, 28410C8DFC7B43A391AFFE7D, 6E51267360FF45E5B7E7E510, 3D1FC6D08705460293E13B09, FF9A707C6D8447D09AB6BB83, 5FD70ECFF05243748E0629D2, A10000000000000000000002, A10000000000000000000004, A10000000000000000000006, A10000000000000000000008,); runOnlyForDeploymentPostprocessing = 0; };
+E6970D0C09524F6C82B0404D = { isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+1D409B71415346708FFB05F3 = { isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+684AE0D8149A40B7A97CC71C = { isa = PBXGroup; children = (3371F1606DFB4DFD89C79A73, 34CFFF07184E48B3AAE78622, C3D5B9E9C44148609ED82935, 5B44D2C4A58C4042878F030B, BC48AE18D2DE4187952BA12F, AC4E1935F0B44124A61BB5FC, 634B8B31E5B4449B8E74EA93, 91C87567AD46434FAC3822F8, A10000000000000000000001, A10000000000000000000003, A10000000000000000000005, A10000000000000000000007, A20000000000000000000009, D006D055880F4EC5BC85C545, 8C6C6970C12242E29F13E13F,); sourceTree = "<group>"; };
+A20000000000000000000009 = { isa = PBXGroup; children = (A20000000000000000000002,); path = SonicTests; sourceTree = SOURCE_ROOT; };
+8C6C6970C12242E29F13E13F = { isa = PBXGroup; children = (C71D4C3D8D5A41B88B5435DF, A20000000000000000000004,); name = Products; sourceTree = "<group>"; };
+0362757C2C134AE991D527B3 = { isa = XCConfigurationList; buildConfigurations = (B0FEADCF5847484C950DEBA0, 2EA6FF24D9324C2A99D93868,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+EA98141A104C411DA735867A = { isa = XCConfigurationList; buildConfigurations = (D66738EC3D8048DFBE45A8D4, 348AA07DD3324FCB98594A71,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+
+A20000000000000000000005 = { isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A20000000000000000000003,); runOnlyForDeploymentPostprocessing = 0; };
+A20000000000000000000006 = { isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+A20000000000000000000007 = { isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+A2000000000000000000000A = { isa = PBXContainerItemProxy; containerPortal = 7D2F60FC5B2B4A1BA8A12384; proxyType = 1; remoteGlobalIDString = 549DB1EA19BB43CBB0BC8165; remoteInfo = Sonic; };
+A2000000000000000000000B = { isa = PBXTargetDependency; target = 549DB1EA19BB43CBB0BC8165; targetProxy = A2000000000000000000000A; };
+A20000000000000000000001 = { isa = PBXNativeTarget; buildConfigurationList = A2000000000000000000000D; buildPhases = (A20000000000000000000005, A20000000000000000000006, A20000000000000000000007,); buildRules = (); dependencies = (A2000000000000000000000B,); name = SonicTests; productName = SonicTests; productReference = A20000000000000000000004; productType = "com.apple.product-type.bundle.unit-test"; };
+A2000000000000000000000D = { isa = XCConfigurationList; buildConfigurations = (A2000000000000000000000E, A2000000000000000000000F,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+A2000000000000000000000E = { isa = XCBuildConfiguration; buildSettings = { BUNDLE_LOADER = "$(TEST_HOST)"; CODE_SIGN_STYLE = Automatic; GENERATE_INFOPLIST_FILE = YES; IPHONEOS_DEPLOYMENT_TARGET = 17.0; PRODUCT_BUNDLE_IDENTIFIER = com.sonic.music.tests; PRODUCT_NAME = "$(TARGET_NAME)"; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2"; TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sonic.app/Sonic"; }; name = Debug; };
+A2000000000000000000000F = { isa = XCBuildConfiguration; buildSettings = { BUNDLE_LOADER = "$(TEST_HOST)"; CODE_SIGN_STYLE = Automatic; GENERATE_INFOPLIST_FILE = YES; IPHONEOS_DEPLOYMENT_TARGET = 17.0; PRODUCT_BUNDLE_IDENTIFIER = com.sonic.music.tests; PRODUCT_NAME = "$(TARGET_NAME)"; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2"; TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sonic.app/Sonic"; }; name = Release; };
+
+B0FEADCF5847484C950DEBA0 = { isa = XCBuildConfiguration; buildSettings = { ALWAYS_SEARCH_USER_PATHS = NO; CLANG_ENABLE_MODULES = YES; CLANG_ENABLE_OBJC_ARC = YES; IPHONEOS_DEPLOYMENT_TARGET = 17.0; SDKROOT = iphoneos; SWIFT_VERSION = 5.0; }; name = Debug; };
+2EA6FF24D9324C2A99D93868 = { isa = XCBuildConfiguration; buildSettings = { ALWAYS_SEARCH_USER_PATHS = NO; CLANG_ENABLE_MODULES = YES; CLANG_ENABLE_OBJC_ARC = YES; IPHONEOS_DEPLOYMENT_TARGET = 17.0; SDKROOT = iphoneos; SWIFT_VERSION = 5.0; }; name = Release; };
+D66738EC3D8048DFBE45A8D4 = { isa = XCBuildConfiguration; buildSettings = { ENABLE_TESTABILITY = YES; CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 4; GENERATE_INFOPLIST_FILE = NO; INFOPLIST_FILE = Sonic/Info.plist; IPHONEOS_DEPLOYMENT_TARGET = 17.0; MARKETING_VERSION = 1.3.0; PRODUCT_BUNDLE_IDENTIFIER = com.sonic.music; PRODUCT_NAME = "$(TARGET_NAME)"; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2"; }; name = Debug; };
+348AA07DD3324FCB98594A71 = { isa = XCBuildConfiguration; buildSettings = { CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 4; GENERATE_INFOPLIST_FILE = NO; INFOPLIST_FILE = Sonic/Info.plist; IPHONEOS_DEPLOYMENT_TARGET = 17.0; MARKETING_VERSION = 1.3.0; PRODUCT_BUNDLE_IDENTIFIER = com.sonic.music; PRODUCT_NAME = "$(TARGET_NAME)"; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2"; }; name = Release; };
+ };
+ rootObject = 7D2F60FC5B2B4A1BA8A12384;
+}
