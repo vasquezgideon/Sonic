@@ -512,7 +512,11 @@ struct NowPlayingView: View {
                     Image(systemName: "shuffle").font(.title3).foregroundStyle(playback.isShuffling ? .cyan : .secondary)
                 }.accessibilityLabel(playback.isShuffling ? "Turn shuffle off" : "Turn shuffle on")
                 Button { cycleRepeatMode() } label: {
-                    Image(systemName: playback.repeatMode.icon).font(.title3).foregroundStyle(playback.repeatMode == .off ? .secondary : .cyan)
+                    .foregroundStyle(
+    playback.repeatMode == .off
+        ? Color.secondary
+        : Color.cyan
+)
                 }.accessibilityLabel(playback.repeatMode.label)
             }.padding(.top, 12)
             Menu {
