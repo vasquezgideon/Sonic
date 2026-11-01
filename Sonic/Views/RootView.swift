@@ -234,7 +234,7 @@ struct SearchView: View {
         if appleMusic.authorizationStatus == .authorized {
             do {
                 let response = try await appleMusic.search(query)
-                appleSongs = Array(response.songs ?? [])
+                appleSongs = Array(response.songs)
             } catch { self.error = "Apple Music: \(error.localizedDescription)" }
         }
         if spotify.isConnected {
@@ -513,9 +513,9 @@ struct NowPlayingView: View {
                 }.accessibilityLabel(playback.isShuffling ? "Turn shuffle off" : "Turn shuffle on")
                 Button { cycleRepeatMode() } label: {
                     .foregroundStyle(
-    playback.repeatMode == .off
-        ? Color.secondary
-        : Color.cyan
+                    playback.repeatMode == .off
+                        ? Color.secondary
+                        : Color.cyan
 )
                 }.accessibilityLabel(playback.repeatMode.label)
             }.padding(.top, 12)
