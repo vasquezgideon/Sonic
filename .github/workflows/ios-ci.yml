@@ -15,9 +15,10 @@ concurrency:
 
 jobs:
   build-and-test:
-    name: Build and test iOS app
+    name: Build, test, and package iOS app
     runs-on: macos-26
     timeout-minutes: 40
+
     steps:
       - name: Check out source
         uses: actions/checkout@v7
@@ -40,13 +41,17 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+
           DEVICE_ID="$(xcrun simctl list devices available -j | python3 -c 'import json,sys; d=json.load(sys.stdin); devices=[x for group in d["devices"].values() for x in group if x.get("isAvailable") and x.get("name", "").startswith("iPhone")]; print(devices[0]["udid"] if devices else "")')"
+
           if [[ -z "$DEVICE_ID" ]]; then
             echo "No available iPhone simulator was found on this runner." >&2
             xcrun simctl list devices available
             exit 1
           fi
+
           echo "Using simulator: $DEVICE_ID"
+
           xcodebuild clean test \
             -project Sonic.xcodeproj \
             -scheme Sonic \
@@ -59,10 +64,11 @@ jobs:
             CODE_SIGNING_REQUIRED=NO \
             | tee "$RUNNER_TEMP/Sonic-xcodebuild.log"
 
-      - name: Compile an unsigned iPhone device build
+      - name: Compile unsigned iPhone device build
         shell: bash
         run: |
           set -euo pipefail
+
           xcodebuild build \
             -project Sonic.xcodeproj \
             -scheme Sonic \
@@ -74,12 +80,55 @@ jobs:
             CODE_SIGNING_REQUIRED=NO \
             | tee "$RUNNER_TEMP/Sonic-device-build.log"
 
-      - name: Upload unsigned iPhone build product
+      - name: Package unsigned iPhone build as IPA
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          APP_PATH="$RUNNER_TEMP/SonicDeviceDerivedData/Build/Products/Release-iphoneos/Sonic.app"
+          IPA_DIR="$RUNNER_TEMP/SonicIPA"
+          IPA_PATH="$RUNNER_TEMP/Sonic-unsigned.ipa"
+
+          if [[ ! -d "$APP_PATH" ]]; then
+            echo "Expected iPhone app was not found: $APP_PATH" >&2
+            exit 1
+          fi
+
+          if [[ ! -f "$APP_PATH/Info.plist" ]]; then
+            echo "Sonic.app is missing Info.plist." >&2
+            exit 1
+          fi
+
+          rm -rf "$IPA_DIR" "$IPA_PATH"
+          mkdir -p "$IPA_DIR/Payload"
+
+          cp -R "$APP_PATH" "$IPA_DIR/Payload/Sonic.app"
+
+          cd "$IPA_DIR"
+          /usr/bin/zip -qry "$IPA_PATH" Payload
+
+          if [[ ! -s "$IPA_PATH" ]]; then
+            echo "IPA packaging failed." >&2
+            exit 1
+          fi
+
+          echo "Created IPA:"
+          ls -lh "$IPA_PATH"
+
+          echo "Checking IPA archive structure:"
+          /usr/bin/unzip -l "$IPA_PATH" | head -30
+
+          /usr/bin/unzip -Z1 "$IPA_PATH" | grep -q '^Payload/Sonic.app/Info.plist$' || {
+            echo "IPA does not contain Payload/Sonic.app/Info.plist" >&2
+            exit 1
+          }
+
+      - name: Upload unsigned IPA for SideStore
         if: success()
         uses: actions/upload-artifact@v7
         with:
-          name: Sonic-iPhone-Unsigned-${{ github.run_number }}
-          path: ${{ runner.temp }}/SonicDeviceDerivedData/Build/Products/Release-iphoneos/Sonic.app
+          name: Sonic-unsigned-IPA-${{ github.run_number }}
+          path: ${{ runner.temp }}/Sonic-unsigned.ipa
           if-no-files-found: error
           retention-days: 14
 
